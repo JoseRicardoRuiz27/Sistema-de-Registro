@@ -7,21 +7,41 @@
 </head>
 <body>
     <div id="element"></div>
+    <button id="btn-clear">Clear</button>
 </body>
-<script>
-    // lst= [{
-    //     name: "Jose",
-    //     age: 30,
-    // },{
-    //     name: "Juan",
-    //     age: 20,
-    // }];
+<script type="module">
+    let lst = [{
+        name: "Jose",
+        age: 30,
+    }, {
+        name: "Juan",
+        age: 20,
+    }];
+
+    // Guardar la lista en localStorage
+    if (!localStorage.getItem("list")) {
+        localStorage.setItem("list", JSON.stringify(lst));
+    }
+
+    // Recuperar la lista del localStorage
     lst = JSON.parse(localStorage.getItem("list"));
-    lst.forEach(element => {
-        let elemento = document.getElementById("element");
-        let div = document.createElement("div");
-        div.innerHTML = element.name + " " + element.age;
-        elemento.appendChild(div);
+    
+    // Verificar si la lista existe en el localStorage
+    if (lst) {
+        lst.forEach(element => {
+            let elemento = document.getElementById("element");
+            let div = document.createElement("div");
+            div.innerHTML = element.name + " " + element.age;
+            elemento.appendChild(div);
+        });
+    }
+
+    // Añadir el evento para limpiar el localStorage al botón correcto
+    document.getElementById("btn-clear").addEventListener("click", function () {
+        localStorage.removeItem("list");
+        document.getElementById("element").innerHTML = "";
+        alert("Lista vacía");
     });
 </script>
 </html>
+

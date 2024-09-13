@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 header{
-    background: linear-gradient( #0ef13b 60%, #eee 40%);
+    background: linear-gradient( #0ef13b , #eee );
     padding: 20px;
     text-align: center;
     padding: 20px;
@@ -24,5 +24,8 @@ form{
         border: 2px solid #0ef13b;
         border-radius: 27px;
         width: 300px;
+    }
+    #puestosInput:hover{
+        cursor: pointer;
     }
 }

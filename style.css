@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header{
+    background: linear-gradient( #0ef13b 60%, #eee 40%);
+    padding: 20px;
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+    -webkit-text-stroke: 1px black;
+    font-size: 30px;
+}
+form{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 10vh;
+    grid-gap: 20px;
+    background: #eee;
+    input{
+        padding: 20px;
+        border: 2px solid #0ef13b;
+        border-radius: 27px;
+        width: 300px;
+    }
+}

@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
+    <header id="header">
+        <h1>Login del Devs</h1>
+    </header>
+    <form>
+        <input type="text" placeholder="Nombre" id="name">
+        <input type="url" placeholder="https://github.com/nombreDeUsuario.png" id="photo">
+        <input list="languages" id="languageInput" name="language" placeholder="Lenguaje">
+            <datalist id="languages">
+                <option value="JavaScript">
+                <option value="Python">
+                <option value="Java">
+                <option value="C#">
+                <option value="PHP">
+            </datalist>
+    </form>
     <div id="element"></div>
     <button id="btn-clear">Clear</button>
 </body>

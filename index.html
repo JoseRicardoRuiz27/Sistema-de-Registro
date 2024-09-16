@@ -8,19 +8,19 @@
 </head>
 <body>
     <header id="header">
-        <h1>Login del Devs</h1>
+        <h1>Login Devs</h1>
     </header>
     <form>
-        <input type="text" placeholder="Nombre" id="name">
-        <input type="url" placeholder="https://github.com/NombreDeUsuario.png" id="photo">
-        <input list="puestos" id="puestosInput" name="puestos" placeholder="Puesto">
+        <input type="text" placeholder="Nombre" class="name" required>
+        <input type="url" class="urlImg" placeholder="https://github.com/NombreDeUsuario.png" required>
+        <input list="puestos" required name="puestos" placeholder="Puesto" class="puestosInput">
             <datalist id="puestos">
                 <option value="Frontend">
                 <option value="Backend">
                 <option value="Fullstack">
                 <option value="Mobile">
             </datalist>
-            <button class="btn-send">Enivar</button>
+            <button class="btn-send" disabled>Enivar</button>
     </form>
     <div class="container">
         <h2>Lista de Usuarios</h2>

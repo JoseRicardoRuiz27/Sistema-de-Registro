@@ -38,6 +38,11 @@ form{
         cursor: pointer;
     }
 }
+.error_message{
+    display: none;
+    font-size: 12px;
+    color: red;
+}
 .container{
     display: none;
     justify-content: center;

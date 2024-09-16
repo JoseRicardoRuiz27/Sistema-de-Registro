@@ -13,7 +13,11 @@
     <form>
         <input type="text" placeholder="Nombre" class="name" required>
         <input type="url" class="urlImg" placeholder="https://github.com/NombreDeUsuario.png" required>
-        <input list="puestos" required name="puestos" placeholder="Puesto" class="puestosInput">
+        <span class="error_message"></span>
+        <input list="puestos" required name="puestos"
+        pattern="https://github\.com/.+\.png"
+        placeholder="Puesto" class="puestosInput">
+
             <datalist id="puestos">
                 <option value="Frontend">
                 <option value="Backend">

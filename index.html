@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,7 @@
                 <option value="Fullstack">
                 <option value="Mobile">
             </datalist>
-            <button>Enivar</button>
+            <button class="btn-send">Enivar</button>
     </form>
     <div class="container">
         <h2>Lista de Usuarios</h2>
@@ -54,42 +54,7 @@
             <p>Carlos Ruiz</p>
         </div>
     </div>
-    <div id="element"></div>
-    <button id="btn-clear">Clear</button>
+    <script src="script.js"></script>
 </body>
-<script type="module">
-    let lst = [{
-        name: "Jose",
-        age: 30,
-    }, {
-        name: "Juan",
-        age: 20,
-    }];
-
-    // Guardar la lista en localStorage
-    if (!localStorage.getItem("list")) {
-        localStorage.setItem("list", JSON.stringify(lst));
-    }
-
-    // Recuperar la lista del localStorage
-    lst = JSON.parse(localStorage.getItem("list"));
-    
-    // Verificar si la lista existe en el localStorage
-    if (lst) {
-        lst.forEach(element => {
-            let elemento = document.getElementById("element");
-            let div = document.createElement("div");
-            div.innerHTML = element.name + " " + element.age;
-            elemento.appendChild(div);
-        });
-    }
-
-    // Añadir el evento para limpiar el localStorage al botón correcto
-    document.getElementById("btn-clear").addEventListener("click", function () {
-        localStorage.removeItem("list");
-        document.getElementById("element").innerHTML = "";
-        alert("Lista vacía");
-    });
-</script>
 </html>
 

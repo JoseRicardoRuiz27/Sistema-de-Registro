@@ -5,6 +5,8 @@ const container = document.querySelector('.container');
 const btnSend = document.querySelector('.btn-send');
 const errorMessage = document.querySelector('.error_message');
 
+let usersList = [];  // Lista para almacenar los usuarios
+
 // Función para validar la URL
 function isValidUrl(url) {
     const regex = /^https:\/\/github\.com\/.+\.png$/;
@@ -33,19 +35,51 @@ function checkInputs() {
     }
 }
 
-// Agrega eventos a los inputs para verificar si se llenaron y son válidos
-nameInput.addEventListener('input', checkInputs);
-imgInput.addEventListener('input', checkInputs);
-puestosInput.addEventListener('input', checkInputs);
+// Función para mostrar los usuarios en el contenedor
+function mostrarUsuarios() {
+    container.innerHTML = '<h2>Lista de Usuarios</h2>';  // Eliminé el <> incorrecto
+
+    // Recorrer el array de usuarios y crear el div correspondiente
+    usersList.forEach(user => {
+        const userDivs = document.createElement('div');
+        userDivs.classList.add('Lenguajes');  // Asegúrate de que la clase está bien escrita
+
+        userDivs.innerHTML = `
+            <p>${user.puesto}</p>
+            <img src="${user.imgUrl}" alt="${user.name}">
+            <p>${user.name}</p>
+        `;
+        container.appendChild(userDivs);
+    });
+}
 
 // Mostrar u ocultar la lista de usuarios al enviar
 btnSend.addEventListener('click', (e) => {
     e.preventDefault();
-    
-    // Cambia la visibilidad del contenedor al enviar
-    if (container.style.display === 'none') {
-        container.style.display = 'grid';
-    } else {
-        container.style.display = 'none';
-    }
+
+    const newUser = {
+        name: nameInput.value,
+        imgUrl: imgInput.value,
+        puesto: puestosInput.value
+    };
+
+    usersList.push(newUser);  // Asegúrate de usar el nombre correcto del array
+
+    // Limpiar los inputs
+    nameInput.value = '';
+    imgInput.value = '';
+    puestosInput.value = '';
+
+    btnSend.disabled = true;
+
+    // Mostrar los usuarios en el contenedor
+    mostrarUsuarios();
+
+    // Cambiar la visibilidad del contenedor al enviar
+    container.style.display = 'grid';
 });
+
+// Agrega eventos a los inputs para verificar si se llenaron y son válidos
+nameInput.addEventListener('input', checkInputs);
+imgInput.addEventListener('input', checkInputs);
+puestosInput.addEventListener('input', checkInputs);

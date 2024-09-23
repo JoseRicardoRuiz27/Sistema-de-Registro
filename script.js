@@ -6,7 +6,8 @@ const btnSend = document.querySelector('.btn-send');
 const errorMessage = document.querySelector('.error_message');
 const userListTitle = document.querySelector('.user-list-title'); // Título de la lista
 
-let usersList = []; // Lista de usuarios
+// Recuperar la lista de usuarios del LocalStorage o inicializarla si está vacía
+let usersList = JSON.parse(localStorage.getItem('usersList')) || [];
 
 // Función para validar la URL
 function isValidUrl(url) {
@@ -25,24 +26,33 @@ function checkInputs() {
     } else {
         btnSend.disabled = true;   // Deshabilita el botón si falta algún input o la URL es incorrecta
 
-        // Mostrar mensaje de error para URL inválida
         if (!isUrlValid && imgInput.value.trim()) {
             errorMessage.textContent = 'La URL debe seguir el formato https://github.com/NombreDeUsuario.png';
-            errorMessage.style.display = 'inline'; // Muestra el mensaje de error
-            imgInput.setCustomValidity('La URL no es válida'); // Añade un mensaje de error personalizado en el input
+            errorMessage.style.display = 'inline';
+            imgInput.setCustomValidity('La URL no es válida');
         } else {
-            errorMessage.style.display = 'none'; // Oculta el mensaje de error si la URL está vacía o válida
-            imgInput.setCustomValidity(''); // Limpia el mensaje de error del input
+            errorMessage.style.display = 'none';
+            imgInput.setCustomValidity('');
         }
     }
 }
 
-// Función para mostrar los usuarios en el contenedor
+// Función para guardar la lista de usuarios en LocalStorage
+function saveToLocalStorage() {
+    localStorage.setItem('usersList', JSON.stringify(usersList));
+}
+
+// Función para eliminar un usuario de la lista y de LocalStorage
+function deleteUser(index) {
+    usersList.splice(index, 1); // Eliminar el usuario de la lista
+    saveToLocalStorage(); // Actualizar el LocalStorage
+    mostrarUsuarios(); // Actualizar el DOM
+}
+
 // Función para mostrar los usuarios en el contenedor
 function mostrarUsuarios() {
-    container.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevos usuarios
+    container.innerHTML = ''; 
 
-    // Agrupar usuarios por puesto
     const agrupadosPorPuesto = usersList.reduce((acc, user) => {
         if (!acc[user.puesto]) {
             acc[user.puesto] = [];
@@ -51,29 +61,39 @@ function mostrarUsuarios() {
         return acc;
     }, {});
 
-    // Recorrer los puestos agrupados y crear el div correspondiente para cada grupo
-    for (const [puesto, usuarios] of Object.entries(agrupadosPorPuesto)) {
+    Object.entries(agrupadosPorPuesto).forEach(([puesto, usuarios]) => {
         const grupoDiv = document.createElement('div');
-        grupoDiv.classList.add('Lenguajes'); // Añadir la clase "Lenguajes" para estilos
+        grupoDiv.classList.add('Lenguajes'); 
 
-        usuarios.forEach(user => {
+        usuarios.forEach((user, index) => {
             const userCard = document.createElement('div');
-            userCard.classList.add('user-card'); // Añadir la clase "user-card" para estilos
-
+            userCard.classList.add('user-card'); 
+            
             userCard.innerHTML = `
                 <p>${user.puesto}</p>
                 <img src="${user.imgUrl}" alt="${user.name}">
                 <p>${user.name}</p>
+                <button class="delete-btn">Eliminar</button>
             `;
+
+            // Evento para eliminar usuario al hacer clic en "Eliminar"
+            userCard.querySelector('.delete-btn').addEventListener('click', () => deleteUser(index));
 
             grupoDiv.appendChild(userCard);
         });
 
         container.appendChild(grupoDiv);
+    });
+
+    // Mostrar el título si hay usuarios
+    if (usersList.length > 0) {
+        userListTitle.style.display = 'block';
+    } else {
+        userListTitle.style.display = 'none';
     }
 }
 
-// Mostrar u ocultar la lista de usuarios al enviar
+// Evento que se dispara al enviar el formulario
 btnSend.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -85,6 +105,9 @@ btnSend.addEventListener('click', (e) => {
 
     usersList.push(newUser); // Añadir el nuevo usuario a la lista
 
+    // Guardar en LocalStorage
+    saveToLocalStorage();
+
     // Limpiar los inputs
     nameInput.value = '';
     imgInput.value = '';
@@ -95,12 +118,22 @@ btnSend.addEventListener('click', (e) => {
     // Mostrar los usuarios en el contenedor
     mostrarUsuarios();
 
-    // Mostrar el título al enviar el formulario
-    userListTitle.style.display = 'block';
-
     // Cambiar la visibilidad del contenedor al enviar
     container.style.display = 'grid';
 });
+
+// Función que carga los usuarios al iniciar la página
+function loadUsersFromLocalStorage() {
+    if (usersList.length > 0) {
+        mostrarUsuarios();
+        container.style.display = 'grid'; // Mostrar la lista si ya hay usuarios
+    } else {
+        userListTitle.style.display = 'none'; // Ocultar el título si no hay usuarios
+    }
+}
+
+// Cargar los usuarios guardados cuando se recarga la página
+window.addEventListener('load', loadUsersFromLocalStorage);
 
 // Agrega eventos a los inputs para verificar si se llenaron y son válidos
 nameInput.addEventListener('input', checkInputs);

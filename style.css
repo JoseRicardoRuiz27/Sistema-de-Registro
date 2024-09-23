@@ -62,14 +62,14 @@ button {
 
 .Lenguajes {
     display: flex;
-    flex-wrap: wrap; /* Permite que las tarjetas se ajusten si son muchas */
-    justify-content: flex-start; /* Alinea las tarjetas a la izquierda */
+    flex-wrap: wrap;
+    justify-content: flex-start;
     align-items: center;
-    gap: 20px; /* Añade un espacio entre las tarjetas */
+    gap: 20px;
     background: #ffd9d9ac;
     padding: 20px;
     border-radius: 27px;
-    margin-bottom: 20px; /* Espacio inferior para separar de otros elementos */
+    margin-bottom: 20px;
 }
 
 .user-card {
@@ -78,10 +78,10 @@ button {
     align-items: center;
     gap: 10px;
     padding: 10px;
-    border: 1px solid #ddd; /* Añade un borde para separar visualmente cada tarjeta */
+    border: 1px solid #ddd;
     border-radius: 15px;
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade sombra para dar profundidad */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .user-card img {
@@ -110,6 +110,18 @@ button {
     font-size: 22px;
     font-weight: 700;
 }
-.user-list-title {
-    display: none;
+
+.userListTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    margin: 20px;
+}
+.delete-btn{
+    width: 120px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Login Devs</title>
 </head>
 <body>
     <header id="header">
@@ -14,9 +14,7 @@
         <input type="text" placeholder="Nombre" class="name" required>
         <input type="url" class="urlImg" placeholder="https://github.com/NombreDeUsuario.png" required>
         <span class="error_message"></span>
-        <input list="puestos" required name="puestos"
-               placeholder="Puesto" class="puestosInput">
-
+        <input list="puestos" required name="puestos" placeholder="Puesto" class="puestosInput">
         <datalist id="puestos">
             <option value="Frontend">
             <option value="Backend">
@@ -25,10 +23,9 @@
         </datalist>
         <button class="btn-send" disabled>Enviar</button>
     </form>
+        <h2 class="userListTitle">Lista de Usuarios</h2>
     <div class="container">
-        <h2 class="user-list-title">Lista de Usuarios</h2>
     </div>
-    
     <script type="module" src="script.js"></script>
 </body>
 </html>
